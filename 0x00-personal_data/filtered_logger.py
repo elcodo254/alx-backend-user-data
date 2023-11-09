@@ -1,8 +1,39 @@
 #!/usr/bin/env python3
-""" Regex-ing (log message obfuscated)"""
+"""
+Regex-ing (log message obfuscated)
+1. Log formatter: class RedactingFormatter
+"""
 
 import re
 from typing import List
+import logging
+
+
+class RedactingFormatter(logging.Formatter):
+    """
+    Redacting Formmatter class
+    Description: Update the class to accept a list of strings fields
+                     constructor argument.
+        Implement the format method to filter values in incoming log records
+        using filter_datum. Values for fields in fields should be filtered.
+        DO NOT extrapolate FORMAT manually. The format method should be less
+        than 5 lines long
+    """
+
+    REDACTION = "***"
+    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
+    SEPARATOR = ";"
+
+    def __init__(self, fields: List[str]):
+        """ Constructor method"""
+        super(RedactingFormatter, self).__init__(self.FORMAT)
+        self.fields = fields
+
+    def format(self, record: logging.LogRecord) -> str:
+        """ Filters values in incoming log records using filter_datum """
+        return filter_datum(self.fields, self.REDACTION,
+                            super(RedactingFormatter, self).format(record),
+                            self.SEPARATOR)
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
