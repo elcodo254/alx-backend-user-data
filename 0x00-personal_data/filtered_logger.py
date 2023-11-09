@@ -1,4 +1,4 @@
-#!usr/bin/env python3
+#!/usr/bin/env python3
 """ Regex-ing (log message obfuscated)"""
 
 import re
