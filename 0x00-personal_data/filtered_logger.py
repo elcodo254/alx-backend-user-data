@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """
 Regex-ing (log message obfuscated)
-1. Log formatter: class RedactingFormatter
+Log formatter: class RedactingFormatter
+create Logger
 """
 
 import re
 from typing import List
 import logging
+
+
+PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
 class RedactingFormatter(logging.Formatter):
@@ -58,3 +62,27 @@ def filter_datum(fields: List[str], redaction: str, message: str,
                          i + "=" + redaction + separator,
                          message)
     return message
+
+
+def get_logger() -> logging.Logger:
+    ''' Description: Implement a get_logger function that takes no arguments
+                     and returns a logging.Logger object.
+        The logger should be named "user_data" and only log up to logging.INFO
+        level. It should not propagate messages to other loggers. It should
+        have a StreamHandler with RedactingFormatter as formatter.
+        Create a tuple PII_FIELDS constant at the root of the module containing
+        the fields from user_data.csv that are considered PII. PII_FIELDS can
+        contain only 5 fields - choose the right list of fields that can are
+        considered as "important" PIIs or information that you must hide in
+        your logs. Use it to parameterize the formatter.
+    '''
+    log = logging.getLogger('user_data')
+    log.setLevel(logging.INFO)
+    log.propagate = False
+
+    sh = logging.StreamHandler()
+    formatter = RedactingFormatter(PII_FIELDS)
+    sh.setFormatter(formatter)
+    log.addHandler(sh)
+
+    return log
