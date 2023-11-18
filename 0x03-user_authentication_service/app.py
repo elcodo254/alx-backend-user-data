@@ -15,12 +15,18 @@ AUTH = Auth()
 
 @app.route('/', methods=['GET'])
 def hello_world() -> str:
+    """
+    get route that returns a json payload
+    """
     msg = {"message": "Bienvenue"}
     return jsonify(msg)
 
 
 @app.route('/users', methods=['POST'])
 def register_user() -> str:
+    """
+    post route for users
+    """
 
     try:
         email = request.form['email']
