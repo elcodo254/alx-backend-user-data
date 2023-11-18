@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+All things routes
+"""
 
 from flask import Flask, jsonify
 from flask import request
