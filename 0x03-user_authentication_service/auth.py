@@ -52,4 +52,3 @@ class Auth:
             Returns string representation of new UUID
         """
         return str(uuid4())
-
