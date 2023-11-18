@@ -60,7 +60,9 @@ class Auth:
         return session_id
 
     def get_user_from_session_id(self, session_id: str) -> Union[str, None]:
-        """ """
+        """
+        gets user's information from session is
+        """
         if session_id is None:
             return None
         try:
@@ -96,7 +98,9 @@ class Auth:
         return reset_token
 
     def update_password(self, reset_token: str, password: str) -> None:
-        """Uses reset token to validate update of users password"""
+        """
+        Uses reset token to validate update of users password
+        """
         if reset_token is None or password is None:
             return None
 

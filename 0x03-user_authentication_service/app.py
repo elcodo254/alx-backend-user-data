@@ -82,7 +82,9 @@ def log_out() -> None:
 
 @app.route('/profile', methods=['GET'], strict_slashes=False)
 def profile() -> str:
-    """response to the GET /profile"""
+    """
+    response to the GET /profile
+    """
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
     if user:
@@ -93,7 +95,9 @@ def profile() -> str:
 
 @app.route('/reset_password', methods=['POST'], strict_slashes=False)
 def get_reset_password_token() -> str:
-    """generate a token and respond with a 200 HTTP status"""
+    """
+    generate a token and respond with a 200 HTTP status
+    """
     try:
         email = request.form['email']
     except KeyError:
@@ -111,7 +115,8 @@ def get_reset_password_token() -> str:
 
 @app.route('/reset_password', methods=['PUT'], strict_slashes=False)
 def update_password() -> str:
-    """ Update the password
+    """
+    Update the password
     PUT /reset_password
     Updates password with reset token
     Return:
