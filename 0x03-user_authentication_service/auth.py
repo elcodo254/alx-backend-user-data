@@ -51,4 +51,5 @@ class Auth:
         """ Generates UUID
             Returns string representation of new UUID
         """
-        return str(uuid4())
+
+        return str(uuid4.uuid4())
